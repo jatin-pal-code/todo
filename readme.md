@@ -3,3 +3,5 @@ add todo.json to hold all todos permanent
 
 
 using postman we can send post request also
+
+we can perform Crud operation using postman
