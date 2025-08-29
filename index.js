@@ -18,6 +18,14 @@ app.use(express.json());
 // Enable CORS for all routes (important for frontend communication)
 app.use(cors());
 
+// Serve static files from public directory
+app.use(express.static(path.join(__dirname, "public")));
+
+// Serve the main HTML file for the root route
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 // Helper function to read todos from the file (synchronous)
 function readTodos() {
   try {
