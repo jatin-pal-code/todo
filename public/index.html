@@ -9,207 +9,214 @@
         font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
           Arial, sans-serif;
         margin: 24px;
+        background-color: #f5f5f5;
       }
       h1 {
         margin: 0 0 16px;
+        color: #333;
+        text-align: center;
       }
-      form {
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: white;
+        padding: 24px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .auth-section {
+        background: #f8f9fa;
+        padding: 16px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        border: 1px solid #e9ecef;
+      }
+      .auth-form {
         display: flex;
         gap: 8px;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
       }
-      input {
-        flex: 1 1 auto;
+      .auth-form input {
+        flex: 1;
+        min-width: 120px;
         padding: 8px 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
       }
-      button {
-        padding: 8px 12px;
+      .auth-form button {
+        padding: 8px 16px;
         cursor: pointer;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: background-color 0.2s;
       }
-      ul {
+      .auth-form button:hover {
+        background: #0056b3;
+      }
+      .auth-status {
+        color: #666;
+        font-style: italic;
+        margin: 0;
+        font-size: 14px;
+      }
+      .todo-form {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .todo-form input {
+        flex: 1 1 auto;
+        padding: 10px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+      .todo-form button {
+        padding: 10px 20px;
+        cursor: pointer;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: background-color 0.2s;
+      }
+      .todo-form button:hover {
+        background: #218838;
+      }
+      .todo-list {
         list-style: none;
         padding: 0;
         margin: 0;
         display: grid;
         gap: 8px;
       }
-      li {
+      .todo-item {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 8px 10px;
+        padding: 12px 16px;
         border: 1px solid #ddd;
         border-radius: 6px;
+        background: white;
+        transition: box-shadow 0.2s;
       }
-      .empty {
+      .todo-item:hover {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .todo-text {
+        font-size: 16px;
+        color: #333;
+      }
+      .delete-btn {
+        padding: 6px 12px;
+        cursor: pointer;
+        background: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: background-color 0.2s;
+      }
+      .delete-btn:hover {
+        background: #c82333;
+      }
+      .empty-state {
         color: #777;
         font-style: italic;
+        text-align: center;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 6px;
+        border: 1px dashed #dee2e6;
+      }
+      .sample-todos {
+        margin-top: 20px;
+        padding: 16px;
+        background: #e7f3ff;
+        border-radius: 6px;
+        border-left: 4px solid #007bff;
+      }
+      .sample-todos h3 {
+        margin: 0 0 12px 0;
+        color: #0056b3;
+        font-size: 16px;
+      }
+      .sample-todos ul {
+        margin: 0;
+        padding-left: 20px;
+        color: #0056b3;
+      }
+      .sample-todos li {
+        margin-bottom: 4px;
       }
     </style>
   </head>
   <body>
-    <h1>To-Do</h1>
-    <section id="auth">
-      <form id="auth-form">
+    <div class="container">
+      <h1>To-Do App</h1>
+
+      <section class="auth-section">
+        <form class="auth-form">
+          <input
+            id="username"
+            placeholder="Username"
+            aria-label="Username"
+            required
+          />
+          <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            aria-label="Password"
+            required
+          />
+          <button id="login-btn" type="button">Login</button>
+          <button id="signup-btn" type="button">Sign Up</button>
+        </form>
+        <p class="auth-status">Not signed in</p>
+      </section>
+
+      <form class="todo-form">
         <input
-          id="username"
-          placeholder="Username"
-          aria-label="Username"
+          id="todo-input"
+          placeholder="Add a task"
+          aria-label="New todo"
           required
         />
-        <input
-          id="password"
-          type="password"
-          placeholder="Password"
-          aria-label="Password"
-          required
-        />
-        <button id="login-btn" type="button">Login</button>
-        <button id="signup-btn" type="button">Sign Up</button>
+        <button type="submit">Add</button>
       </form>
-      <p id="auth-status" class="empty"></p>
-    </section>
-    <form id="todo-form">
-      <input
-        id="todo-input"
-        placeholder="Add a task"
-        aria-label="New todo"
-        required
-      />
-      <button type="submit">Add</button>
-    </form>
-    <ul id="todo-list"></ul>
-    <template id="todo-item-template">
-      <li>
-        <span class="text"></span>
-        <button class="delete" aria-label="Delete">Delete</button>
-      </li>
-    </template>
-    <script>
-      const API = "http://localhost:3000";
-      const list = document.getElementById("todo-list");
-      const form = document.getElementById("todo-form");
-      const input = document.getElementById("todo-input");
-      const tpl = document.getElementById("todo-item-template");
-      const username = document.getElementById("username");
-      const password = document.getElementById("password");
-      const loginBtn = document.getElementById("login-btn");
-      const signupBtn = document.getElementById("signup-btn");
-      const authStatus = document.getElementById("auth-status");
 
-      let token = localStorage.getItem("token") || "";
+      <ul class="todo-list">
+        <li class="todo-item">
+          <span class="todo-text">Complete project documentation</span>
+          <button class="delete-btn" aria-label="Delete">Delete</button>
+        </li>
+        <li class="todo-item">
+          <span class="todo-text">Review code changes</span>
+          <button class="delete-btn" aria-label="Delete">Delete</button>
+        </li>
+        <li class="todo-item">
+          <span class="todo-text">Test authentication flow</span>
+          <button class="delete-btn" aria-label="Delete">Delete</button>
+        </li>
+      </ul>
 
-      function setToken(newToken, user) {
-        token = newToken;
-        if (newToken) {
-          localStorage.setItem("token", newToken);
-          authStatus.textContent = `Signed in as ${user}`;
-        } else {
-          localStorage.removeItem("token");
-          authStatus.textContent = "Not signed in";
-        }
-      }
-
-      async function loadTodos() {
-        try {
-          const res = await fetch(API + "/todos", {
-            headers: token ? { Authorization: `Bearer ${token}` } : {},
-          });
-          const todos = await res.json();
-          renderTodos(todos);
-        } catch (e) {
-          console.error(e);
-          list.innerHTML =
-            '<li class="empty">Could not load todos. Is the server running on 3000?</li>';
-        }
-      }
-
-      function renderTodos(todos) {
-        list.innerHTML = "";
-        if (!todos.length) {
-          list.innerHTML = '<li class="empty">No todos yet</li>';
-          return;
-        }
-        todos.forEach((todo) => {
-          const node = tpl.content.firstElementChild.cloneNode(true);
-          node.querySelector(".text").textContent = todo.text;
-          node.querySelector(".delete").addEventListener("click", async () => {
-            await fetch(API + "/todos/" + todo.id, {
-              method: "DELETE",
-              headers: token ? { Authorization: `Bearer ${token}` } : {},
-            });
-            loadTodos();
-          });
-          list.appendChild(node);
-        });
-      }
-
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const text = input.value.trim();
-        if (!text) return;
-        await fetch(API + "/todos", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
-          },
-          body: JSON.stringify({ text }),
-        });
-        input.value = "";
-        loadTodos();
-      });
-
-      loginBtn.addEventListener("click", async () => {
-        try {
-          const res = await fetch(API + "/auth/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              username: username.value.trim(),
-              password: password.value,
-            }),
-          });
-          if (!res.ok) {
-            const msg = await res.json().catch(() => ({}));
-            throw new Error(msg.message || "Login failed");
-          }
-          const data = await res.json();
-          setToken(data.token, data.username);
-          loadTodos();
-        } catch (err) {
-          authStatus.textContent = err.message;
-        }
-      });
-
-      signupBtn.addEventListener("click", async () => {
-        try {
-          const res = await fetch(API + "/auth/signup", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              username: username.value.trim(),
-              password: password.value,
-            }),
-          });
-          if (!res.ok) {
-            const msg = await res.json().catch(() => ({}));
-            throw new Error(msg.message || "Signup failed");
-          }
-          const data = await res.json();
-          setToken(data.token, data.username);
-          loadTodos();
-        } catch (err) {
-          authStatus.textContent = err.message;
-        }
-      });
-
-      if (token) {
-        authStatus.textContent = "Signed in";
-      } else {
-        authStatus.textContent = "Not signed in";
-      }
-      loadTodos();
-    </script>
+      <div class="sample-todos">
+        <h3>Sample Features:</h3>
+        <ul>
+          <li>User authentication (signup/login)</li>
+          <li>Add new todo items</li>
+          <li>Delete existing todos</li>
+          <li>JWT token-based security</li>
+          <li>Responsive design</li>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>
